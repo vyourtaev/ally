@@ -40,3 +40,7 @@ Thumbs.db
 
 #vim
 *.swp
+
+#virtualenv
+.env
+.venv
