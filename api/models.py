@@ -47,10 +47,11 @@ class Service(models.Model):
     description = models.CharField(max_length=256, blank=True, null=True)
     image_name = models.CharField('Image', max_length=256)
     image_version = models.CharField('v.', max_length=64, default='latest')
+    replicas = models.IntegerField('Replicas', default=1, blank=True, null=True)
     stack = models.ForeignKey(
         Stack, on_delete=models.CASCADE,
         related_name='services',
-        null=True)
+        null=True, blank=True)
     status = models.BooleanField(
         'Status',
         default="False",

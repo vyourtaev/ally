@@ -32,7 +32,7 @@ class VolumeInline(NestedStackedInline):
 
 
 class ServiceInline(NestedStackedInline):
-    fields = (('name', 'description'), 'image_name')
+    fields = (('name', 'description'), ('image_name', 'image_version'))
     model = Service
     extra = 1
     fk_name = 'stack'
@@ -60,6 +60,7 @@ make_atatus_on.nshort_description = "Deactivate selected services"
 
 @admin.register(Service)
 class ServiceAdmin(NestedModelAdmin):
+    fields = (('name', 'description'), ('image_name', 'image_version'),'replicas')
     model = Service
     list_display = ('name', 'created_t', 'status')
     actions = [make_atatus_on, make_atatus_off]

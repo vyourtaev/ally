@@ -1,0 +1,18 @@
+{% if service %}
+	<ul>
+		<li>docker create</li>
+		<ul>--name {{ service.name }}</ul>
+		<ul>--replicas {{ service.replicas }}</ul>
+		{% for port in service.ports.all %}
+		<ul>--published {{ port.port_ext }}:{{ port.port_int }}</ul>
+		{% endfor %}
+		{% for e in service.variables.all %}
+		<ul>--env {{ e.name }}:{{ e.value }}</ul>
+		{% endfor %}
+		{% for v in service.volumes.all %}
+		<ul>--mount type={{ v.name }},{{ v.volume }}</ul>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No services found</p>
+{% endif %}

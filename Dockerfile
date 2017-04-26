@@ -31,5 +31,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /opt/apps/code
 
-CMD ["/usr/bin/supervisord", "-e", "debug"]
+# CMD ["/usr/bin/supervisord", "-e", "debug"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0"]
 

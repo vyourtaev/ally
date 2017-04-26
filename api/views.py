@@ -7,7 +7,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import Http404
-
+from django.shortcuts import render
 from django.http import HttpResponse
 from api.models import Stack, Service
 from api.serializers import StackSerializer, ServiceSerializer
@@ -17,7 +17,8 @@ from api.forms import ServiceUploadForm
 
 
 def index(request, format=None):
-    return HttpResponse("hello world")
+    service = Service.objects.get(pk=3)
+    return render(request, 'service.html', { 'service':  service })
 
 class StackList(generics.ListCreateAPIView):
     queryset = Stack.objects.all()
