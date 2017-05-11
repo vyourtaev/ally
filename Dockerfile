@@ -21,7 +21,6 @@ ADD . /opt/apps/code
 # Install Python dependencies
 RUN pip3 install -r /opt/apps/code/requirements.txt
 
-EXPOSE 5005
 
 # Configure Nginx
 RUN ln -s /opt/apps/code/nginx.conf /etc/nginx/sites-enabled/django_docker.conf
@@ -31,6 +30,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /opt/apps/code
 
+EXPOSE 8000
+
 # CMD ["/usr/bin/supervisord", "-e", "debug"]
-CMD ["python3", "manage.py", "runserver"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
