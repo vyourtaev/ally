@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nested_inline',
-    'api.apps.ApiConfig',
-    'rest_framework',
     'admin_reorder',
+    'api.apps.ApiConfig',
+    'ui.apps.UiConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

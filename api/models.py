@@ -10,6 +10,29 @@ LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 
+class Environment(models.Model):
+    """
+    Environment general
+    """
+    ENV_CHOICES = (
+        ('DEV', 'DEV'),
+        ('INT', 'INT'),
+        ('PPE', 'PPE'),
+    )
+    name = models.CharField(
+        max_length=64,
+        choices=ENV_CHOICES,
+        default=('DEV'),
+        unique=True
+    )
+    description = models.CharField(max_length=128, blank=True, null=True)
+    created_t = models.DateTimeField('Created', auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 class Stack(models.Model):
     """Docker Stack mode"""
     VERSION_CHOICES = (
@@ -28,6 +51,10 @@ class Stack(models.Model):
     description = models.CharField(max_length=256, blank=True, null=True)
     slug = models.SlugField(max_length=64, unique=True)
     created_t = models.DateTimeField('Created', auto_now_add=True)
+    environment = models.ForeignKey(
+        Environment, on_delete=models.CASCADE,
+        related_name='stacks',
+        null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Stacks"
@@ -52,6 +79,11 @@ class Service(models.Model):
         Stack, on_delete=models.CASCADE,
         related_name='services',
         null=True, blank=True)
+    environment = models.ForeignKey(
+        Environment, on_delete=models.CASCADE,
+        related_name='services',
+        null=True, blank=True)
+
     status = models.BooleanField(
         'Status',
         default="False",
@@ -63,6 +95,9 @@ class Service(models.Model):
 
     def get_absolute_url(self):
             return "/api/services/%i/" % self.id
+
+    def __str__(self):
+        return self.name
 
 
 class Port(models.Model):
@@ -93,6 +128,9 @@ class Variable(models.Model):
                                 related_name='variables')
     created_t = models.DateTimeField('Deployed', auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Volume(models.Model):
     """Array of Volumes for service"""
@@ -103,3 +141,10 @@ class Volume(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE,
                                 related_name='volumes')
     created_t = models.DateTimeField('Deployed', auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+

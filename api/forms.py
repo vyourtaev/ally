@@ -55,25 +55,35 @@ class VolumeForm(forms.ModelForm):
         fields = ['name', 'volume', 'description']
 
 
-class ServiceUploadForm(forms.Form):
-    file = forms.FileField()
+class PortForm(forms.ModelForm):
+    """
+    Ports Form
+    """
 
-    def clean_file(self):
-            data = self.cleaned_data["file"]
-            # read and parse the file, create a Python dictionary `data_dict` from it
-            form = ServiceForm(data_dict)
-            if form.is_valid():
-                # we don't want to put the object to the database on this step
-                self.instance = form.save(commit=False)
-            else:
-                # You can use more specific error message here
-                raise forms.ValidationError(u"The file contains invalid data.")
-            return data
+    class Meta:
+        model = Port
+        # fields = ['name', 'volume', 'description']
+        fields = ['port_ext', 'port_int', 'name', 'description']
 
-    def save(self):
-            # We are not overriding the `save` method here because `form.Form` does not have it.
-            # We just add it for convenience.
-            instance = getattr(self, "instance", None)
-            if instance:
-                instance.save()
-            return instance
+
+# class ServiceUploadForm(forms.Form):
+#     file = forms.FileField()
+#
+#     def clean_file(self):
+#             data = self.cleaned_data["file"]
+#             form = ServiceForm(data_dict)
+#             if form.is_valid():
+#                 # we don't want to put the object to the database on this step
+#                 self.instance = form.save(commit=False)
+#             else:
+#                 # You can use more specific error message here
+#                 raise forms.ValidationError(u"The file contains invalid data.")
+#             return data
+#
+#     def save(self):
+#             # We are not overriding the `save` method here because `form.Form` does not have it.
+#             # We just add it for convenience.
+#             instance = getattr(self, "instance", None)
+#             if instance:
+#                 instance.save()
+#             return instance

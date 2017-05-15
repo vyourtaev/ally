@@ -1,0 +1,10 @@
+<h1>Web Application list</h1>
+<table width="100%" border="1">
+	{% for service in services %}
+	<tr>
+		<td>{{ service.name }}</td>
+		<td>{{ service.description }}</td>
+		<td>{{ service.environment }}</td>
+	</tr>
+	{% endfor %}
+</table>

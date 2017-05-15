@@ -13,7 +13,7 @@ from api.models import Stack, Service
 from api.serializers import StackSerializer, ServiceSerializer
 from rest_framework.views import APIView
 
-from api.forms import ServiceUploadForm
+# from api.forms import ServiceUploadForm
 
 
 def index(request, format=None):
