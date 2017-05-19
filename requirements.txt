@@ -2,6 +2,12 @@ Django==1.11
 django-modeladmin-reorder==0.2
 django-nested-inline==0.3.7
 djangorestframework==3.6.2
+docker==2.2.1
+docker-pycreds==0.2.1
 gunicorn==19.7.1
+httpie==0.9.9
 Pygments==2.2.0
 pytz==2017.2
+requests==2.13.0
+six==1.10.0
+websocket-client==0.40.0

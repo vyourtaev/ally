@@ -63,9 +63,12 @@ make_atatus_on.nshort_description = "Deactivate selected services"
 
 @admin.register(Service)
 class ServiceAdmin(NestedModelAdmin):
-    fields = (('name', 'description'), ('image_name', 'image_version'), 'replicas')
+    fields = (
+        ('name', 'description'),
+        ('image_name', 'image_version'),
+        'replicas', 'environment')
     model = Service
-    list_display = ('name', 'created_t', 'status')
+    list_display = ('name', 'environment', 'created_t', 'status')
     actions = [make_atatus_on, make_atatus_off]
     inlines = [PortInline, VariableInline, VolumeInline]
 

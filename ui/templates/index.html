@@ -1,10 +1,20 @@
-<h1>Web Application list</h1>
+<h1>Docker Services list</h1>
 <table width="100%" border="1">
-	{% for service in services %}
+	{% for a in apps %}
 	<tr>
-		<td>{{ service.name }}</td>
-		<td>{{ service.description }}</td>
-		<td>{{ service.environment }}</td>
+		<td>{{ a.name }}</td>
+		<td>{{ a.description }}</td>
+		<td>
+			<table width="100%">
+				{% for u in a.urls.all %}
+				<tr>
+					<td>
+						<a href="{{ u.url }}" target="blank">{{ u.url }}</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>	
+		</td>
 	</tr>
 	{% endfor %}
 </table>
