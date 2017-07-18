@@ -1,0 +1,17 @@
+<table>
+{% for image in images %}
+<tr>
+	<td>{{ image.attrs.RepoTags }}</td>
+	<td>{{ image.attrs.Id }}</td>
+	<td>
+	<table>
+	{% for label in images.attrs.Labels %}
+		<tr><td>{{ lable }}</td></tr>
+	{% endfor %}
+	</table>
+	</td>
+	<td>{{ image.attrs.Size }}</td>
+	<td>{{ image.attrs.Created }}</td>
+</tr>
+{% endfor %}
+</table>

@@ -1,0 +1,47 @@
+<table border="1" style="font-size:14px" >
+{% for node  in nodes %}
+<tr>
+	<tr>
+		<td>ID</td>
+		<td>{{ node.attrs.ID }}</td>
+	</tr>
+	<tr>
+		<td>Version</td>
+	      	<td>Index: {{ node.attrs.Version.Index}}</td>
+	</tr>
+	<tr>
+		<td>CreatedAt</td>
+		<td>{{ node.attrs.CreatedAt }}</td>
+	</tr>
+	<tr>
+		<td>UpdatedAt</td>
+		<td>{{ node.attrs.UpdatedAt }}</td>
+	</tr>
+	<tr>
+		<td>ManagerStatus</td>
+		<td>Reachability: {{ node.attrs.ManagerStatus.Reachability }}</td>
+	        <td>Addr: {{ node.attrs.ManagerStatus.Addr }}</td>
+	</tr>
+	<tr>
+		<td>Role: {{ node.attrs.Spec }} </td>
+		<td>Availablity: {{ node.attrs.Spec }}; </td>
+	</tr>
+	<td>
+	<table>
+	{% for label in images.attrs.Spec.Labels %}
+		<tr><td>{{ label }}</td></tr>
+	{% endfor %}
+	</table>
+	</td>
+	<td>{{ image.attrs.Status }}</td>
+	<td>
+	<table>
+	{% for item in images.attrs.Description %}
+		<tr><td>{{ item }}</td></tr>
+	{% endfor %}
+	</table>
+	</td>
+</tr>
+{% endfor %}
+</table>
+

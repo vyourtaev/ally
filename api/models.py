@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
+from django.core.validators import RegexValidator
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
@@ -18,6 +19,8 @@ class Environment(models.Model):
         ('DEV', 'DEV'),
         ('INT', 'INT'),
         ('PPE', 'PPE'),
+        ('IT', 'Integration Tests'),
+        ('App', 'Generic'),
     )
     name = models.CharField(
         max_length=64,
@@ -26,11 +29,17 @@ class Environment(models.Model):
         unique=True
     )
     description = models.CharField(max_length=128, blank=True, null=True)
+    port_range = models.CharField(
+        'Ports range',
+        max_length=256,
+        default="8000-9000",
+        help_text="Alowed range 88-190,1,3,300-350",
+        validators=[RegexValidator('^(\d+[-,]*\d+)+$',
+                                   message="Use syntax 88-190,1,2,3,300-350")])
     created_t = models.DateTimeField('Created', auto_now_add=True)
 
     def __str__(self):
         return self.name
-
 
 
 class Stack(models.Model):
@@ -93,6 +102,10 @@ class Service(models.Model):
     class Meta:
         verbose_name_plural = "Services"
 
+    def save(self, *args, **kwargs):
+        # self.name = self.environment.name.lower()+"_"+self.name
+        super(Service, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
             return "/api/services/%i/" % self.id
 
@@ -144,7 +157,3 @@ class Volume(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-

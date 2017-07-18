@@ -39,7 +39,9 @@ Thumbs.db
 
 #vim
 *.swp
+*.swo
 
 #virtualenv
 .env
 .venv
+.ropeproject

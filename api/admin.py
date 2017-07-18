@@ -75,4 +75,4 @@ class ServiceAdmin(NestedModelAdmin):
 
 @admin.register(Environment)
 class EnvionmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'description', 'port_range', 'created_t')
