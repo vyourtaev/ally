@@ -1,6 +1,22 @@
-<table border="1" style="font-size:14px" >
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+	Docker nodes list
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
 {% for node  in nodes %}
-<tr>
+    <tr>
+	<th>Node name</th>
+	<th>ID</th>
+	<th>Role</th>
+	<th>IP Address</th>
+	<th>Status</th>
+    </tr>
 	<tr>
 		<td>ID</td>
 		<td>{{ node.attrs.ID }}</td>
@@ -45,3 +61,6 @@
 {% endfor %}
 </table>
 
+{% bootstrap_pagination nodes  url="docer_nodes" size="small" %}
+
+{% endblock %}

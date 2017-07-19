@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+	Docker objects list
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+    {% for obj in objects %}
+    <tr>
+	<td>{{ obj.attrs.RepoTags }}</td>
+	<td>{{ obj.attrs.Id }}</td>
+	<td>
+	<table>
+	{% for label in objects.attrs.Labels %}
+		<tr><td>{{ lable }}</td></tr>
+	{% endfor %}
+	</table>
+	</td>
+	<td>{{ obj.attrs.Size }}</td>
+	<td>{{ obj.attrs.Created }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% bootstrap_pagination objects url="{{ request.get_full_path }}" size="small" %}
+
+{% endblock %}

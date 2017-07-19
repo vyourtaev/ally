@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nested_inline',
-    #'admin_reorder',
+    # 'admin_reorder',
     'api.apps.ApiConfig',
     'ui.apps.UiConfig',
     'rest_framework',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'admin_reorder.middleware.ModelAdminReorder',
+    # 'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'ally.urls'
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'ally.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+'/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

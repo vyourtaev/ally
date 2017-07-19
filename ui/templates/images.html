@@ -1,8 +1,26 @@
-<table>
-{% for image in images %}
-<tr>
-	<td>{{ image.attrs.RepoTags }}</td>
+{% extends 'base.html' %}
+
+{% load bootstrap3 %} 
+{% load timestamp_to_time %}
+
+{% block title %}
+	Docker images list
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+    <tr>
+	    <th>ID image</th>
+	    <th>Tags</td>
+	    <th>Labels</th>
+	    <th>Size</th>
+	    <th>Created</th>
+    </tr>
+    {% for image in images %}
+    <tr>
 	<td>{{ image.attrs.Id }}</td>
+	<td>{{ image.attrs.RepoTags }}</td>
 	<td>
 	<table>
 	{% for label in images.attrs.Labels %}
@@ -10,8 +28,13 @@
 	{% endfor %}
 	</table>
 	</td>
-	<td>{{ image.attrs.Size }}</td>
-	<td>{{ image.attrs.Created }}</td>
-</tr>
-{% endfor %}
+	<td>{{ image.attrs.Size|filesizeformat }}</td>
+	<td>{{ image.attrs.Created|timestamp_to_time|date:"D d M Y"}}</td>
+    </tr>
+    {% endfor %}
 </table>
+<div align="center">
+{% bootstrap_pagination images  url="docker_images" size="small" %}
+</div>
+
+{% endblock %}
