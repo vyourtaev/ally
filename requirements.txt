@@ -9,6 +9,6 @@ gunicorn==19.7.1
 httpie==0.9.9
 Pygments==2.2.0
 pytz==2017.2
-requests==2.13.0
+requests==2.20.0
 six==1.10.0
 websocket-client==0.40.0
